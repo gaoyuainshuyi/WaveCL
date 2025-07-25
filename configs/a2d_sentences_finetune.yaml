@@ -1,13 +1,13 @@
 # * Train
 lr:
   desc: main model learning rate
-  value: 5e-5
+  value: 3e-5
 lr_backbone:
   desc: backbone learning rate
-  value: 5e-6
+  value: 3e-6
 text_encoder_lr:
   desc: text encoder learning rate
-  value: 5e-6
+  value: 1e-6
 weight_decay:
   value: 1e-4
 clip_max_norm:
@@ -202,7 +202,7 @@ eval_batch_size:
 #checkpoint path
 checkpoint_path:
   desc: 'the checkpoint path'
-  value: "runs/a2d_sentences/a2d/checkpoints/best.pth.tar"
+  value: "runs/a2d_sentences/finetune_a2d/checkpoints/14.pth.tar"
 
 out_dir:
   desc: 'the visualize path'

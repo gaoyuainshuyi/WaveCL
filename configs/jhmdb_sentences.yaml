@@ -7,9 +7,11 @@ lr_backbone:
   value: 5e-6
 text_encoder_lr:
   desc: text encoder learning rate
-  value: 5e-6
+  value: 5e-5
 weight_decay:
   value: 1e-4
+# epochs:
+#   value: 40
 clip_max_norm:
   desc: gradient clipping max norm
   value: 0.1
@@ -20,6 +22,9 @@ seed:
   value: 42
 
 # * Backbone
+backbone:
+  desc: name of backbone
+  value: video-swin-t
 backbone_pretrained:
   desc: whether to load pretrained weights
   value: true
@@ -156,7 +161,7 @@ giou_coef:
 
 # * Dataset Parameters
 dataset_name:
-  value: a2d_sentences
+  value: jhmdb_sentences
 resize_and_crop_augmentations:
   value: true
 horizontal_flip_augmentations:
@@ -182,18 +187,30 @@ num_workers:
   desc: number of workers to load data
   value: 8
 
-# * Evaluation
 dataset_coco_gt_format_path:
   desc: path to the dataset's ground truth data in COCO format (a JSON file). used for metrics calculation (mAP etc.)
         using Pycocotools.
-  value: 'data/a2d_sentences/a2d_sentences_test_annotations_in_coco_format.json'
+  value: 'jhmdb_sentences/jhmdb_sentences_gt_annotations_in_coco_format.json'
 calculate_precision_and_iou_metrics:
   value: true
+generate_new_samples_metadata:
+  desc:  true to sample new samples from JHMDB-Sentences using the given random seed.
+         false to load an existing samples file.
+  value: false
 
 # * Wandb
 wandb_mode:
   desc: wandb logging mode. on - 'online', off - 'disabled'
   value: 'disabled'
+
+#batch_size
+batch_size:
+  desc: "total train batch size"
+  value: 2
+
+# version:
+#   desc: the version of the model
+#   value: "jhd_77"
 
 eval_batch_size:
   desc: "total test batch size"
@@ -202,8 +219,8 @@ eval_batch_size:
 #checkpoint path
 checkpoint_path:
   desc: 'the checkpoint path'
-  value: "runs/a2d_sentences/a2d/checkpoints/best.pth.tar"
+  value: runs/a2d_sentences/finetune_a2d/checkpoints/19.pth.tar
 
 out_dir:
   desc: 'the visualize path'
-  value: a2d/runs/visualize
+  value: jhmdb/runs/visualize
